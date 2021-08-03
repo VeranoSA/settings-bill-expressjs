@@ -8,7 +8,7 @@ describe('settings-bill', function(){
 
     it('should be able to record calls', function(){
         settingsBill.recordAction('call');
-        assert.equal(1, settingsBill.actionsFor('call').length);
+        assert.strictEqual(1, settingsBill.actionsFor('call').length);
     });
 
     it('should be able to set the settings', function(){
@@ -41,9 +41,9 @@ describe('settings-bill', function(){
         settingsBill.recordAction('call');
         settingsBill.recordAction('sms');
 
-        assert.equal(2.35, settingsBill.totals().smsTotal);
-        assert.equal(3.35, settingsBill.totals().callTotal);
-        assert.equal(5.70, settingsBill.totals().grandTotal);
+        assert.strictEqual(2.35, settingsBill.totals().smsTotal);
+        assert.strictEqual(3.35, settingsBill.totals().callTotal);
+        assert.strictEqual(5.70, settingsBill.totals().grandTotal);
 
     });
 
@@ -61,9 +61,9 @@ describe('settings-bill', function(){
         settingsBill.recordAction('sms');
         settingsBill.recordAction('sms');
 
-        assert.equal(4.70, settingsBill.totals().smsTotal);
-        assert.equal(6.70, settingsBill.totals().callTotal);
-        assert.equal(11.40, settingsBill.totals().grandTotal);
+        assert.strictEqual(4.70, settingsBill.totals().smsTotal);
+        assert.strictEqual(6.70, settingsBill.totals().callTotal);
+        assert.strictEqual(11.40, settingsBill.totals().grandTotal);
 
     });
 
@@ -79,7 +79,7 @@ describe('settings-bill', function(){
         settingsBill.recordAction('call');
         settingsBill.recordAction('sms');
 
-        assert.equal(true, settingsBill.hasReachedWarningLevel());
+        assert.strictEqual(true, settingsBill.hasReachedWarningLevel());
     });
 
     it('should know when critical level reached', function(){
@@ -95,7 +95,7 @@ describe('settings-bill', function(){
         settingsBill.recordAction('call');
         settingsBill.recordAction('sms');
 
-        assert.equal(true, settingsBill.hasReachedCriticalLevel());
+        assert.strictEqual(true, settingsBill.hasReachedCriticalLevel());
 
     });
 });
