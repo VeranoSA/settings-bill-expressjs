@@ -1,10 +1,15 @@
 const express = require('express'); //Set up express
-
+const exphbs  = require('express-handlebars'); //importing mport the express-handlebars module
 const app = express(); //express instance
 
+app.engine('handlebars', exphbs({defaultLayout: 'main'})); //configure express as midleware
+app.set('view engine', 'handlebars');
+
 app.get('/', function(req, res){ //add a default route
-    res.send('Settings Bill App')  //Sending a message back
+    res.render('index')  //to use res.render you need to configure a view engine for express js
 });
+
+app.use(express.static('public')); //making our public folder visible
 
 app.post('/settings', function(req, res){  //settings route that is a post
       
