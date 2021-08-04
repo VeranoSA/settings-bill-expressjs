@@ -7,7 +7,7 @@ const app = express(); //express instance
 const settingsBill = SettingsBill(); //instance
 
 moment().format()
-app.engine('handlebars', exphbs({layoutsDir: "views/layouts/"})); //configure express as midleware
+app.engine('handlebars', exphbs({ layoutsDir: "views/layouts/" })); //configure express as midleware
 app.set('view engine', 'handlebars');
 
 app.use(express.static('public')); //making our public folder visible
@@ -21,20 +21,20 @@ app.get('/', function (req, res) { //add a default route
     //setting up critical and warning levels
     let className = '';
 
-    if(settingsBill.hasReachedWarningLevel()){
+    if (settingsBill.hasReachedWarningLevel()) {
         className = 'warning'
     }
-    if(settingsBill.hasReachedCriticalLevel()){
+    if (settingsBill.hasReachedCriticalLevel()) {
         className = 'danger'
     }
-    if(settingsBill.totals().grandTotal<settingsBill.getSettings().criticalLevel){
-        
+    if (settingsBill.totals().grandTotal < settingsBill.getSettings().criticalLevel) {
+
     }
     res.render('index', {   //to use res.render you need to configure a view engine for express js
         settings: settingsBill.getSettings(),  //go into my index template and render data back, sending settings objects back into my object                                                   
         totals: settingsBill.totals(),
         classNames: className
-    
+
     })
 
 });
@@ -65,14 +65,14 @@ app.get('/actions', function (req, res) { //actions which going to display our r
 });
 
 app.get('/actions/:actionType', function (req, res) { //actions which going helps us display calls or sms
-    
+
     let actions = settingsBill.actions()
     actions.forEach(elem => {
         elem.timestamps = moment(elem.timestamp).fromNow();
     })
-    
+
     const actionType = req.params.actionType
-    res.render('actions', {actions: settingsBill.actionsFor(actionType)})
+    res.render('actions', { actions: settingsBill.actionsFor(actionType) })
 });
 
 

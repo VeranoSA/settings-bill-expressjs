@@ -1,12 +1,11 @@
 const assert = require('assert');
 
 const SettingsBill = require('../settings-bill');
-
-describe('settings-bill', function(){
+describe('settings-bill', function () {
 
     const settingsBill = SettingsBill();
 
-    it('should be able to record calls', function(){
+    it('should be able to record calls', function () {
         settingsBill.setSettings({
             smsCost: 2.35,
             callCost: 3.35,
@@ -17,7 +16,7 @@ describe('settings-bill', function(){
         assert.strictEqual(1, settingsBill.actionsFor('call').length)
     });
 
-    it('should be able to set the settings', function(){
+    it('should be able to set the settings', function () {
         settingsBill.setSettings({
             smsCost: 2.35,
             callCost: 3.35,
@@ -35,7 +34,7 @@ describe('settings-bill', function(){
 
     });
 
-    it('should calculate the right totals', function(){
+    it('should calculate the right totals', function () {
         const settingsBill = SettingsBill();
         settingsBill.setSettings({
             smsCost: 2.35,
@@ -53,7 +52,7 @@ describe('settings-bill', function(){
 
     });
 
-    it('should calculate the right totals for multiple actions', function(){
+    it('should calculate the right totals for multiple actions', function () {
         const settingsBill = SettingsBill();
         settingsBill.setSettings({
             smsCost: 2.35,
@@ -73,7 +72,7 @@ describe('settings-bill', function(){
 
     });
 
-    it('should know when warning level reached', function(){
+    it('should know when warning level reached', function () {
         const settingsBill = SettingsBill();
         settingsBill.setSettings({
             smsCost: 2.50,
@@ -88,7 +87,7 @@ describe('settings-bill', function(){
         assert.strictEqual(true, settingsBill.hasReachedWarningLevel());
     });
 
-    it('should know when critical level reached', function(){
+    it('should know when critical level reached', function () {
         const settingsBill = SettingsBill();
         settingsBill.setSettings({
             smsCost: 2.50,
