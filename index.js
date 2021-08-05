@@ -27,6 +27,8 @@ app.get('/', function (req, res) { //add a default route
     if (settingsBill.hasReachedCriticalLevel()) {
         className = 'danger'
     }
+
+    //setting up my grandTotal to keep adding only its less than critical
     if (settingsBill.totals().grandTotal < settingsBill.getSettings().criticalLevel) {
 
     }
