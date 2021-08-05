@@ -1,4 +1,5 @@
 const express = require('express'); //Set up express
+const app = express();
 const exphbs = require('express-handlebars'); //importing mport the express-handlebars module
 const moment = require('moment'); //require our body parser
 const SettingsBill = require('./settings-bill');
@@ -77,9 +78,13 @@ app.get('/actions/:actionType', function (req, res) { //actions which going help
     res.render('actions', { actions: settingsBill.actionsFor(actionType) })
 });
 
+app.set('port', (process.env.PORT || 5000));
 
-const PORT = process.env.PORT || 3011; //Make my port number configurable
+//For avoidong Heroku $PORT error
+app.get('/', function(request, response) {
+    var result = 'App is running'
+    response.send(result);
+}).listen(app.get('port'), function() {
+    console.log('App is running, server is listening on port ', app.get('port'));
 
-app.listen(3011, function () {
-    console.log("App Started at", PORT)
 });
