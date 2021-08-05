@@ -1,10 +1,8 @@
 const express = require('express'); //Set up express
-const app = express();
 const exphbs = require('express-handlebars'); //importing mport the express-handlebars module
 const moment = require('moment'); //require our body parser
 const SettingsBill = require('./settings-bill');
 
-const app = express(); //express instance
 const settingsBill = SettingsBill(); //instance
 
 moment().format()
