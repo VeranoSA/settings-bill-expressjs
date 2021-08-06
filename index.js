@@ -68,13 +68,14 @@ app.get('/actions', function (req, res) { //actions which going to display our r
 
 app.get('/actions/:actionType', function (req, res) { //actions which going helps us display calls or sms
 
+    const actionType = req.params.actionType
+    res.render('actions', { actions: settingsBill.actionsFor(actionType) })
+
     let actions = settingsBill.actions()
     actions.forEach(elem => {
         elem.timestamps = moment(elem.timestamp).fromNow();
     })
 
-    const actionType = req.params.actionType
-    res.render('actions', { actions: settingsBill.actionsFor(actionType) })
 });
 
 
