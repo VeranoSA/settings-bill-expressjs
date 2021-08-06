@@ -71,6 +71,7 @@ app.get('/actions/:actionType', function (req, res) { //actions which going help
     const actionType = req.params.actionType
     res.render('actions', { actions: settingsBill.actionsFor(actionType) })
 
+    
     let actions = settingsBill.actions()
     actions.forEach(elem => {
         elem.timestamps = moment(elem.timestamp).fromNow();
