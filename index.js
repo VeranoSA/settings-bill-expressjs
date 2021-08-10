@@ -1,12 +1,14 @@
 const express = require('express'); //Set up express
 const exphbs = require('express-handlebars'); //importing mport the express-handlebars module
-const moment = require('moment'); //require our body parser
 const SettingsBill = require('./settings-bill');
+const moment = require('moment'); //require our body parser
+moment().format();
+
 
 const app = express(); //express instance
 const settingsBill = SettingsBill(); //instance
 
-moment().format()
+
 app.engine('handlebars', exphbs({ layoutsDir: "views/layouts/" })); //configure express as midleware
 app.set('view engine', 'handlebars');
 
@@ -61,6 +63,11 @@ app.post('/action', function (req, res) { //action route is a post //capture the
 });
 
 app.get('/actions', function (req, res) { //actions which going to display our routes
+    
+    let actions = settingsBill.actions()
+    actions.forEach(elem => {
+        elem.timestamps = moment(elem.timestamp).fromNow();
+    })
     res.render('actions', {
         actions: settingsBill.actions()
     });
@@ -69,13 +76,12 @@ app.get('/actions', function (req, res) { //actions which going to display our r
 app.get('/actions/:actionType', function (req, res) { //actions which going helps us display calls or sms
 
     const actionType = req.params.actionType
-    res.render('actions', { actions: settingsBill.actionsFor(actionType) })
-
     
     let actions = settingsBill.actions()
     actions.forEach(elem => {
         elem.timestamps = moment(elem.timestamp).fromNow();
     })
+    res.render('actions', { actions: settingsBill.actionsFor(actionType) })
 
 });
 
